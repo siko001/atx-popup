@@ -25,6 +25,13 @@
 	pointer-events: auto;
 }
 
+/* Some themes hide all [role="dialog"] globally.
+   Force visibility for this plugin's dialog only. */
+#atx-popup-overlay.is-visible #atx-popup-container[role="dialog"] {
+	display: block !important;
+	visibility: visible !important;
+}
+
 /* Container — the popup card
    ------------------------------------------- */
 

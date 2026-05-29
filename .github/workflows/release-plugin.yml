@@ -118,14 +118,16 @@ jobs:
 
           if gh release view "$TAG" >/dev/null 2>&1; then
             gh release upload "$TAG" "dist/${ZIP_NAME}" --clobber
+            gh release edit "$TAG" --latest
           elif [[ "${GITHUB_REF}" == refs/heads/* ]]; then
             gh release create "$TAG" "dist/${ZIP_NAME}" \
               --target "${GITHUB_SHA}" \
               --title "${PLUGIN_NAME} v${VERSION}" \
               --notes "Release v${VERSION}" \
-              --latest=false
+              --latest
           else
             gh release create "$TAG" "dist/${ZIP_NAME}" \
               --title "${PLUGIN_NAME} v${VERSION}" \
-              --notes "Release v${VERSION}"
+              --notes "Release v${VERSION}" \
+              --latest
           fi
