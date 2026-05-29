@@ -1,0 +1,669 @@
+/* ==========================================================================
+   ATX Popup Blocks – Frontend Styles
+   ========================================================================== */
+
+/* ---------- Hero Block ---------- */
+.atx-hero-block {
+	position: relative;
+	overflow: hidden;
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+.atx-hero-overlay {
+	position: absolute;
+	inset: 0;
+	z-index: 1;
+	pointer-events: none;
+}
+
+.atx-hero-content {
+	position: relative;
+	z-index: 2;
+	max-width: 680px;
+	margin: 0 auto;
+}
+
+.atx-hero-block[style*="text-align:center"] .atx-hero-content,
+.atx-hero-block[style*="text-align: center"] .atx-hero-content {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.atx-hero-content h2 {
+	margin: 0 0 12px;
+	font-size: 28px;
+	line-height: 1.25;
+}
+
+.atx-hero-content p {
+	margin: 0 0 20px;
+	font-size: 16px;
+	line-height: 1.5;
+	opacity: 0.9;
+}
+
+.atx-hero-button {
+	display: inline-block;
+	padding: 12px 28px;
+	font-size: 15px;
+	font-weight: 600;
+	text-decoration: none;
+	border-radius: 4px;
+	transition: opacity 0.2s;
+	cursor: pointer;
+}
+
+.atx-hero-button:hover {
+	opacity: 0.85;
+}
+
+/* ---------- Two Columns Block ---------- */
+.atx-two-columns-block {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+/* Target direct children */
+.atx-two-columns-block > * {
+	box-sizing: border-box;
+}
+
+/* Ratio classes — flex-grow for proportion, flex-basis for min before wrapping */
+.atx-two-columns-block.atx-ratio-50-50 > * { flex: 1 1 250px; }
+.atx-two-columns-block.atx-ratio-60-40 > *:first-child { flex: 6 1 250px; }
+.atx-two-columns-block.atx-ratio-60-40 > *:last-child  { flex: 4 1 200px; }
+.atx-two-columns-block.atx-ratio-40-60 > *:first-child { flex: 4 1 200px; }
+.atx-two-columns-block.atx-ratio-40-60 > *:last-child  { flex: 6 1 250px; }
+.atx-two-columns-block.atx-ratio-70-30 > *:first-child { flex: 7 1 250px; }
+.atx-two-columns-block.atx-ratio-70-30 > *:last-child  { flex: 3 1 150px; }
+.atx-two-columns-block.atx-ratio-30-70 > *:first-child { flex: 3 1 150px; }
+.atx-two-columns-block.atx-ratio-30-70 > *:last-child  { flex: 7 1 250px; }
+
+/* When columns wrap (stacked), each takes full width */
+.atx-two-columns-block > .wp-block-group,
+.atx-two-columns-block > div {
+	min-width: 0;
+	width: auto;
+}
+
+/* Divider between columns — only when side by side */
+.atx-two-columns-block[data-divider="true"] > *:first-child {
+	border-right: 1px solid var(--atx-divider-color, #e0e0e0);
+}
+
+/* Stack on mobile — force single column */
+@media (max-width: 768px) {
+	.atx-two-columns-block > * {
+		flex: 1 1 100% !important;
+		max-width: 100% !important;
+	}
+	.atx-two-columns-block[data-divider="true"] > *:first-child {
+		border-right: none;
+		border-bottom: 1px solid var(--atx-divider-color, #e0e0e0);
+		padding-bottom: 20px;
+		margin-bottom: 20px;
+	}
+}
+
+/* ---------- CTA Banner Block ---------- */
+.atx-cta-banner-block {
+	box-sizing: border-box;
+}
+
+.atx-cta-banner-block.atx-cta-horizontal {
+	display: flex;
+	align-items: center;
+	gap: 24px;
+}
+
+.atx-cta-banner-block.atx-cta-vertical {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+}
+
+.atx-cta-icon {
+	flex-shrink: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.atx-cta-icon .dashicons {
+	font-size: inherit;
+	width: auto;
+	height: auto;
+}
+
+.atx-cta-icon img {
+	display: block;
+	object-fit: contain;
+}
+
+.atx-cta-content {
+	flex: 1;
+	min-width: 0;
+}
+
+.atx-cta-content h3 {
+	margin: 0 0 8px;
+	font-size: 20px;
+	line-height: 1.3;
+}
+
+.atx-cta-content p {
+	margin: 0 0 16px;
+	font-size: 15px;
+	line-height: 1.5;
+	opacity: 0.85;
+}
+
+.atx-cta-actions {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+	flex-wrap: wrap;
+}
+
+.atx-cta-button {
+	display: inline-block;
+	padding: 10px 24px;
+	font-size: 14px;
+	font-weight: 600;
+	text-decoration: none;
+	transition: opacity 0.2s;
+	cursor: pointer;
+}
+
+.atx-cta-button:hover {
+	opacity: 0.85;
+}
+
+.atx-cta-secondary {
+	font-size: 14px;
+	text-decoration: underline;
+	opacity: 0.8;
+}
+
+.atx-cta-secondary:hover {
+	opacity: 1;
+}
+
+/* ---------- Feature Grid Block ---------- */
+.atx-feature-grid-block .atx-feature-grid-wrapper {
+	display: grid;
+}
+
+.atx-feature-grid-card {
+	box-sizing: border-box;
+}
+
+.atx-feature-grid-card .dashicons {
+	display: block;
+	margin-bottom: 12px;
+	width: auto;
+	height: auto;
+}
+
+.atx-feature-grid-card h4 {
+	margin: 0 0 8px;
+	font-size: 16px;
+	font-weight: 600;
+	line-height: 1.3;
+}
+
+.atx-feature-grid-card p {
+	margin: 0;
+	font-size: 14px;
+	line-height: 1.5;
+	opacity: 0.8;
+}
+
+/* ---------- Testimonial Block ---------- */
+.atx-testimonial-block {
+	box-sizing: border-box;
+}
+
+.atx-testimonial-block.atx-testimonial-standard {
+	display: flex;
+	gap: 20px;
+	align-items: flex-start;
+}
+
+.atx-testimonial-block.atx-testimonial-centered {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+}
+
+.atx-testimonial-block.atx-testimonial-minimal {
+	text-align: left;
+}
+
+.atx-testimonial-avatar {
+	flex-shrink: 0;
+}
+
+.atx-testimonial-avatar img {
+	display: block;
+	border-radius: 50%;
+	object-fit: cover;
+}
+
+.atx-testimonial-content {
+	flex: 1;
+	min-width: 0;
+}
+
+.atx-testimonial-quote-icon {
+	display: block;
+	font-size: 48px;
+	line-height: 1;
+	opacity: 0.3;
+	margin-bottom: 8px;
+	font-family: Georgia, serif;
+}
+
+.atx-testimonial-centered .atx-testimonial-quote-icon {
+	text-align: center;
+}
+
+.atx-testimonial-quote {
+	margin: 0 0 16px;
+	font-size: 16px;
+	line-height: 1.6;
+	font-style: italic;
+}
+
+.atx-testimonial-author {
+	margin: 0 0 4px;
+	font-size: 15px;
+	font-weight: 600;
+}
+
+.atx-testimonial-role {
+	margin: 0 0 8px;
+	font-size: 13px;
+	opacity: 0.7;
+}
+
+.atx-testimonial-stars {
+	display: flex;
+	gap: 2px;
+}
+
+.atx-testimonial-centered .atx-testimonial-stars {
+	justify-content: center;
+}
+
+.atx-testimonial-stars .dashicons {
+	font-size: 16px;
+	width: 16px;
+	height: 16px;
+}
+
+/* ---------- Newsletter Block ---------- */
+.atx-newsletter-block {
+	box-sizing: border-box;
+}
+
+.atx-newsletter-image {
+	display: block;
+	max-width: 80px;
+	height: auto;
+	margin: 0 auto 16px;
+}
+
+.atx-newsletter-block[style*="text-align:left"] .atx-newsletter-image,
+.atx-newsletter-block[style*="text-align: left"] .atx-newsletter-image {
+	margin-left: 0;
+}
+
+.atx-newsletter-block h2 {
+	margin: 0 0 10px;
+	font-size: 24px;
+	line-height: 1.3;
+	letter-spacing: -0.02em;
+}
+
+.atx-newsletter-block p {
+	margin: 0 0 24px;
+	font-size: 15px;
+	line-height: 1.6;
+	opacity: 0.75;
+}
+
+.atx-newsletter-form {
+	width: 100%;
+	max-width: 460px;
+}
+
+/* Center the form when block is centered */
+.atx-newsletter-block[style*="text-align:center"] .atx-newsletter-form,
+.atx-newsletter-block[style*="text-align: center"] .atx-newsletter-form {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.atx-newsletter-form.atx-form-stacked {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.atx-newsletter-form.atx-form-inline {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	align-items: stretch;
+}
+
+.atx-newsletter-form.atx-form-inline input[type="email"],
+.atx-newsletter-form.atx-form-inline input[type="text"] {
+	flex: 1;
+	min-width: 0;
+}
+
+.atx-newsletter-form input[type="email"],
+.atx-newsletter-form input[type="text"] {
+	padding: 13px 16px;
+	font-size: 15px;
+	border: 2px solid;
+	outline: none;
+	box-sizing: border-box;
+	width: 100%;
+	transition: border-color 0.2s, box-shadow 0.2s;
+	background: #fff;
+}
+
+.atx-newsletter-form input:focus {
+	border-color: #0073aa;
+	box-shadow: 0 0 0 3px rgba(0, 115, 170, 0.12);
+}
+
+.atx-newsletter-form input::placeholder {
+	opacity: 0.45;
+}
+
+.atx-newsletter-submit {
+	padding: 13px 28px;
+	font-size: 15px;
+	font-weight: 700;
+	border: none;
+	cursor: pointer;
+	transition: transform 0.15s, box-shadow 0.15s, opacity 0.2s;
+	white-space: nowrap;
+	letter-spacing: 0.02em;
+	box-sizing: border-box;
+	max-width: 100%;
+}
+
+.atx-newsletter-submit:hover {
+	transform: translateY(-1px);
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+	opacity: 0.92;
+}
+
+.atx-newsletter-submit:active {
+	transform: translateY(0);
+	box-shadow: none;
+}
+
+.atx-newsletter-privacy {
+	display: block;
+	margin-top: 16px;
+	font-size: 12px;
+	opacity: 0.5;
+	line-height: 1.5;
+}
+
+/* ---------- Media Slider Block ---------- */
+.atx-media-slider-block {
+	position: relative;
+	overflow: hidden;
+	contain: layout;
+}
+
+.atx-slider-overlay {
+	position: absolute;
+	inset: 0;
+	z-index: 2;
+	pointer-events: none;
+}
+
+/* ---- Track: absolute fills the fixed-height wrapper ---- */
+.atx-slider-track {
+	position: absolute;
+	inset: 0;
+	will-change: transform;
+}
+
+/* ---- Fade mode (default) ---- */
+.atx-media-slider-block[data-transition="fade"] .atx-slider-slide,
+.atx-media-slider-block:not([data-transition]) .atx-slider-slide {
+	position: absolute;
+	inset: 0;
+	opacity: 0;
+	transition: opacity 0.5s ease;
+	will-change: opacity;
+}
+
+.atx-media-slider-block[data-transition="fade"] .atx-slider-slide.atx-slide-active,
+.atx-media-slider-block:not([data-transition]) .atx-slider-slide.atx-slide-active {
+	opacity: 1;
+}
+
+/* ---- Slide mode ---- */
+.atx-media-slider-block[data-transition="slide"] .atx-slider-track {
+	display: flex;
+	transition: transform 0.5s ease;
+	position: absolute;
+	inset: 0;
+}
+
+.atx-media-slider-block[data-transition="slide"] .atx-slider-slide {
+	flex: 0 0 100%;
+	height: 100%;
+}
+
+/* ---- Shared media styles ---- */
+.atx-slider-slide img,
+.atx-slider-slide video {
+	width: 100%;
+	height: 100%;
+	display: block;
+	object-fit: cover;
+}
+
+.atx-slider-caption {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	padding: 12px 16px;
+	background: linear-gradient(transparent, rgba(0, 0, 0, 0.6));
+	color: #fff;
+	font-size: 14px;
+	z-index: 3;
+}
+
+/* Arrows */
+.atx-slider-arrow {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	z-index: 5;
+	border: none;
+	text-align: center;
+	cursor: pointer;
+	transition: opacity 0.2s;
+	padding: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.atx-slider-arrow:hover {
+	opacity: 0.8;
+}
+
+.atx-slider-prev {
+	left: 10px;
+}
+
+.atx-slider-next {
+	right: 10px;
+}
+
+/* Dots */
+.atx-slider-dots {
+	position: absolute;
+	bottom: 12px;
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: 5;
+	display: flex;
+	gap: 8px;
+}
+
+.atx-dot {
+	border: none;
+	padding: 0;
+	cursor: pointer;
+	transition: background 0.2s, transform 0.2s;
+	display: block;
+}
+
+.atx-dot:hover {
+	transform: scale(1.2);
+}
+
+/* Hide arrows/dots based on data attributes */
+.atx-media-slider-block[data-arrows="false"] .atx-slider-arrow {
+	display: none;
+}
+
+.atx-media-slider-block[data-dots="false"] .atx-slider-dots {
+	display: none;
+}
+
+/* ---------- Testimonial Slider ---------- */
+.atx-testimonial-slider {
+	position: relative;
+	overflow: hidden;
+	contain: layout;
+}
+
+.atx-testimonial-track {
+	position: relative;
+}
+
+.atx-testimonial-slide {
+	position: absolute;
+	inset: 0;
+	opacity: 0;
+	transition: opacity 0.5s ease;
+	will-change: opacity;
+}
+
+.atx-testimonial-slide.atx-testi-active {
+	opacity: 1;
+	position: relative;
+}
+
+.atx-testi-arrow {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	z-index: 5;
+	border: none;
+	text-align: center;
+	cursor: pointer;
+	transition: opacity 0.2s;
+	padding: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.atx-testi-arrow:hover {
+	opacity: 0.8;
+}
+
+.atx-testi-prev { left: 8px; }
+.atx-testi-next { right: 8px; }
+
+.atx-testi-dots {
+	display: flex;
+	justify-content: center;
+	gap: 8px;
+	margin-top: 16px;
+}
+
+.atx-testi-dot {
+	border: none;
+	padding: 0;
+	cursor: pointer;
+	transition: background 0.2s, transform 0.2s;
+	display: block;
+}
+
+.atx-testi-dot:hover {
+	transform: scale(1.2);
+}
+
+.atx-testimonial-slider[data-arrows="false"] .atx-testi-arrow { display: none; }
+.atx-testimonial-slider[data-dots="false"] .atx-testi-dots { display: none; }
+
+/* ---------- Focus Styles ---------- */
+.atx-slider-arrow:focus-visible,
+.atx-testi-arrow:focus-visible,
+.atx-dot:focus-visible,
+.atx-testi-dot:focus-visible,
+.atx-newsletter-submit:focus-visible,
+.atx-cta-button:focus-visible,
+.atx-hero-button:focus-visible {
+	outline: 2px solid #0073aa;
+	outline-offset: 2px;
+}
+
+/* Reset button appearance for dot navigation */
+.atx-dot,
+.atx-testi-dot {
+	border: none;
+	padding: 0;
+	-webkit-appearance: none;
+	appearance: none;
+	cursor: pointer;
+	transition: background 0.2s, transform 0.2s;
+	display: block;
+}
+
+.atx-dot:hover,
+.atx-testi-dot:hover {
+	transform: scale(1.2);
+}
+
+/* ---------- Reduced Motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+	.atx-slider-slide,
+	.atx-slider-track,
+	.atx-testimonial-slide,
+	.atx-hero-button,
+	.atx-cta-button,
+	.atx-newsletter-submit {
+		transition: none !important;
+		animation: none !important;
+	}
+}
+
+/* ---------- Testimonial blockquote reset ---------- */
+.atx-testimonial-quote {
+	margin: 0 0 16px;
+	padding: 0;
+	border: none;
+}

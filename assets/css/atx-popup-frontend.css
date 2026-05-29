@@ -1,0 +1,283 @@
+/* =============================================
+   ATX Popup — Frontend Styles
+   ============================================= */
+
+/* The inline <style> in the template handles the initial hidden state:
+   #atx-popup-overlay:not(.is-visible) { display: none !important }
+   This prevents any flash before CSS loads.
+   GSAP handles all opacity/transform animations. */
+
+#atx-popup-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 999999;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	pointer-events: none;
+}
+
+#atx-popup-overlay.is-visible {
+	display: flex !important;
+	pointer-events: auto;
+}
+
+/* Container — the popup card
+   ------------------------------------------- */
+
+#atx-popup-container {
+	position: relative;
+	background: #fff;
+	border-radius: 8px;
+	box-shadow: 0 8px 40px rgba(0, 0, 0, 0.25);
+	width: 90%;
+	max-height: 90vh;
+	overflow: hidden;
+	overflow-y: auto;
+}
+
+/* Close Button
+   ------------------------------------------- */
+
+#atx-popup-close {
+	position: absolute;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: none;
+	padding: 0;
+	cursor: pointer;
+	z-index: 2;
+	line-height: 1;
+	transition: background 0.2s ease, color 0.2s ease;
+	/* Defaults — overridden by inline CSS from settings */
+	top: 10px;
+	right: 10px;
+	width: 36px;
+	height: 36px;
+	font-size: 18px;
+	background: rgba(255, 255, 255, 0.85);
+	color: #333;
+	border-radius: 50%;
+}
+
+/* Custom icon image — inherits font-size as width/height */
+#atx-popup-close .atx-close-icon {
+	width: 1em;
+	height: 1em;
+	object-fit: contain;
+	pointer-events: none;
+}
+
+/* Fixed close button — button stays absolute on the container,
+   scrolling moves to the content div instead. */
+.atx-close-fixed {
+	overflow: hidden !important;
+}
+
+.atx-close-fixed #atx-popup-content {
+	overflow-y: auto;
+	max-height: 90vh;
+}
+
+#atx-popup-close:hover,
+#atx-popup-close:focus {
+	outline: none;
+}
+
+/* Content
+   ------------------------------------------- */
+
+#atx-popup-content {
+	overflow: hidden;
+	box-sizing: border-box;
+}
+
+#atx-popup-content > * {
+	max-width: 100%;
+	box-sizing: border-box;
+}
+
+#atx-popup-content > *:first-child {
+	margin-top: 0;
+}
+
+#atx-popup-content > *:last-child {
+	margin-bottom: 0;
+}
+
+#atx-popup-content img {
+	max-width: 100%;
+	height: auto;
+}
+
+/* ---- Block containment inside popup ---- */
+
+/* All ATX blocks must stay within popup bounds */
+#atx-popup-content .atx-media-slider-block,
+#atx-popup-content .atx-testimonial-block,
+#atx-popup-content .atx-testimonial-slider,
+#atx-popup-content .atx-hero-block,
+#atx-popup-content .atx-cta-banner-block,
+#atx-popup-content .atx-feature-grid-block,
+#atx-popup-content .atx-newsletter-block,
+#atx-popup-content .atx-two-columns-block {
+	overflow: hidden;
+	box-sizing: border-box;
+	max-width: 100%;
+}
+
+/* Sliders inside popup — arrows must stay inside */
+#atx-popup-content .atx-slider-arrow,
+#atx-popup-content .atx-testi-arrow {
+	z-index: 5;
+}
+
+/* Don't override slider images — they need height:100% + object-fit:cover */
+#atx-popup-content .atx-slider-slide img,
+#atx-popup-content .atx-slider-slide video {
+	max-width: none;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+/* Don't override hero video backgrounds */
+#atx-popup-content .atx-hero-video {
+	max-width: none;
+	height: 100%;
+}
+
+/* Two columns inside popup — prevent overflow */
+#atx-popup-content .atx-two-columns-block {
+	display: flex;
+	flex-wrap: nowrap;
+}
+
+#atx-popup-content .atx-two-columns-block > * {
+	min-width: 0;
+	overflow: hidden;
+}
+
+/* Cover block: fill width, respect container rounding */
+#atx-popup-content .wp-block-cover {
+	border-radius: 0;
+}
+
+#atx-popup-content > .wp-block-cover:first-child {
+	border-radius: 8px 8px 0 0;
+}
+
+#atx-popup-content > .wp-block-cover:last-child {
+	border-radius: 0 0 8px 8px;
+}
+
+#atx-popup-content > .wp-block-cover:only-child {
+	border-radius: 8px;
+}
+
+/* =============================================
+   Animations — handled by GSAP.
+   No CSS transitions needed for open/close.
+   ============================================= */
+
+/* =============================================
+   Responsive
+   ============================================= */
+
+@media (max-width: 768px) {
+	#atx-popup-container {
+		width: calc(100% - 24px) !important;
+		max-width: none !important;
+		min-width: 0 !important;
+		border-radius: 6px;
+	}
+
+	/* Stack two columns on mobile */
+	#atx-popup-content .atx-two-columns-block {
+		flex-direction: column !important;
+		flex-wrap: wrap !important;
+	}
+
+	#atx-popup-content .atx-two-columns-block > * {
+		flex: 0 0 100% !important;
+		max-width: 100% !important;
+	}
+
+	/* Feature grid — single column on mobile */
+	#atx-popup-content .atx-feature-grid-block .atx-feature-grid-wrapper,
+	#atx-popup-content [style*="grid-template-columns"],
+	#atx-popup-content [style*="flex-wrap"] {
+		grid-template-columns: 1fr !important;
+	}
+
+	/* Slider arrows smaller on mobile */
+	#atx-popup-content .atx-slider-arrow,
+	#atx-popup-content .atx-testi-arrow {
+		width: 28px !important;
+		height: 28px !important;
+		font-size: 16px !important;
+	}
+
+	/* CTA banner — stack vertically */
+	#atx-popup-content .atx-cta-banner-block {
+		flex-direction: column !important;
+	}
+
+	/* Newsletter form always stacked on mobile */
+	#atx-popup-content .atx-newsletter-form {
+		max-width: 100% !important;
+	}
+
+	/* Testimonial — stack layout on mobile */
+	#atx-popup-content .atx-testimonial-block {
+		flex-direction: column !important;
+	}
+}
+
+@media (max-width: 480px) {
+	#atx-popup-container {
+		width: calc(100% - 16px) !important;
+	}
+
+	/* Even smaller arrows */
+	#atx-popup-content .atx-slider-arrow,
+	#atx-popup-content .atx-testi-arrow {
+		width: 24px !important;
+		height: 24px !important;
+		font-size: 14px !important;
+	}
+
+	/* Reduce padding on blocks */
+	#atx-popup-content .atx-cta-banner-block,
+	#atx-popup-content .atx-newsletter-block,
+	#atx-popup-content .atx-testimonial-block {
+		padding: 16px !important;
+	}
+}
+
+/* =============================================
+   Screen-reader only utility
+   ============================================= */
+
+.atx-sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}
+
+/* Hide popup when printing */
+@media print {
+	#atx-popup-overlay {
+		display: none !important;
+	}
+}

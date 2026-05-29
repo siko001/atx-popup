@@ -1,0 +1,488 @@
+
+/* Color picker — keep everything inside sidebar */
+.atx-popup-meta-box .iris-border .iris-picker-inner {
+	right: 0 !important;
+}
+
+.atx-popup-meta-box .iris-picker {
+	max-width: 100% !important;
+	overflow: hidden !important;
+}
+
+/* Hide "View" button for popups — not publicly viewable */
+.post-type-atx_popup .editor-preview-dropdown,
+.post-type-atx_popup .block-editor-post-preview__button-toggle,
+.post-type-atx_popup .edit-post-header__settings .is-tertiary[aria-label="View"] {
+	display: none !important;
+}
+
+/* Quick device toggle at top */
+.atx-quick-device-toggle {
+	display: flex;
+	justify-content: center;
+	gap: 4px;
+	margin: 10px 0 4px;
+}
+
+/* Preview bar */
+.atx-preview-bar {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin-bottom: 4px;
+}
+
+.atx-preview-link {
+	display: flex;
+	align-items: center;
+	color: #50575e;
+	text-decoration: none;
+}
+
+.atx-preview-link:hover {
+	color: #2271b1;
+}
+
+.atx-preview-link .dashicons {
+	font-size: 20px;
+	width: 20px;
+	height: 20px;
+}
+
+.atx-preview-code {
+	font-size: 10px;
+	background: #f0f0f1;
+	padding: 2px 6px;
+	border-radius: 3px;
+	color: #888;
+	white-space: nowrap;
+}
+
+.atx-reset-cookies-btn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 28px;
+	height: 28px;
+	padding: 0;
+	border: 1px solid #c3c4c7;
+	border-radius: 4px;
+	background: #fff;
+	cursor: pointer;
+	color: #50575e;
+	margin-left: auto;
+	transition: all 0.2s ease;
+}
+
+.atx-reset-cookies-btn:hover {
+	border-color: #d63638;
+	color: #d63638;
+}
+
+.atx-reset-cookies-btn .dashicons {
+	font-size: 16px;
+	width: 16px;
+	height: 16px;
+}
+
+.atx-reset-cookies-btn.is-spinning .dashicons {
+	animation: atx-spin 0.8s linear infinite;
+}
+
+.atx-reset-cookies-btn.is-done {
+	border-color: #00a32a;
+	color: #00a32a;
+}
+
+@keyframes atx-spin {
+	from { transform: rotate(0deg); }
+	to { transform: rotate(360deg); }
+}
+
+.atx-popup-meta-box .atx-popup-field {
+	margin-bottom: 12px;
+}
+
+.atx-popup-meta-box .atx-popup-field > label {
+	display: block;
+	font-weight: 600;
+	margin-bottom: 4px;
+}
+
+.atx-popup-meta-box .atx-popup-field > label input[type="checkbox"] {
+	margin-right: 4px;
+}
+
+/* Force all form elements to stay within the sidebar */
+.atx-popup-meta-box select,
+.atx-popup-meta-box input[type="number"],
+.atx-popup-meta-box input[type="text"],
+#atx_popup_settings select,
+#atx_popup_settings input[type="number"],
+#atx_popup_settings input[type="text"] {
+	width: 100% !important;
+	max-width: 100% !important;
+	box-sizing: border-box !important;
+}
+
+.atx-popup-meta-box,
+#atx_popup_settings,
+#atx_popup_settings .inside {
+	max-width: 100% !important;
+	box-sizing: border-box;
+}
+
+.atx-popup-meta-box .wp-picker-container,
+.atx-popup-meta-box .wp-picker-holder,
+.atx-popup-meta-box .wp-picker-input-wrap {
+	max-width: 100% !important;
+}
+
+.atx-popup-meta-box .wp-picker-container .wp-color-result {
+	margin: 0 0 6px;
+}
+
+.atx-popup-meta-box hr {
+	margin: 16px 0;
+	border: 0;
+	border-top: 1px solid #ddd;
+}
+
+.atx-popup-meta-box .description {
+	font-style: italic;
+	color: #666;
+	margin-top: 4px;
+}
+
+/* Device toggle buttons */
+.atx-device-toggle {
+	display: flex;
+	gap: 4px;
+	margin-top: 6px;
+}
+
+.atx-device-btn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 36px;
+	height: 36px;
+	padding: 0;
+	border: 1px solid #c3c4c7;
+	border-radius: 4px;
+	background: #fff;
+	cursor: pointer;
+	color: #666;
+	transition: all 0.15s ease;
+}
+
+.atx-device-btn:hover {
+	border-color: #2271b1;
+	color: #2271b1;
+}
+
+.atx-device-btn.is-active {
+	background: #2271b1;
+	border-color: #2271b1;
+	color: #fff;
+}
+
+.atx-device-btn .dashicons {
+	font-size: 18px;
+	width: 18px;
+	height: 18px;
+}
+
+.atx-device-panel {
+	margin-top: 10px;
+}
+
+/* -----------------------------------------------
+   Size rows: label, number input, unit toggle
+   ----------------------------------------------- */
+
+.atx-size-row {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin-bottom: 6px;
+}
+
+.atx-size-label {
+	flex: 0 0 72px;
+	font-size: 11px;
+	font-weight: 600;
+	color: #555;
+	white-space: nowrap;
+}
+
+.atx-size-controls {
+	flex: 1;
+	display: flex;
+	align-items: center;
+	gap: 4px;
+}
+
+.atx-size-input {
+	flex: 1;
+	min-width: 0;
+	padding: 4px 6px !important;
+	font-size: 12px !important;
+	height: 28px !important;
+	text-align: center;
+	border: 1px solid #c3c4c7;
+	border-radius: 3px;
+	-moz-appearance: textfield;
+}
+
+.atx-size-input::-webkit-inner-spin-button,
+.atx-size-input::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+.atx-size-input:focus {
+	border-color: #2271b1;
+	box-shadow: 0 0 0 1px #2271b1;
+	outline: none;
+}
+
+/* Unit toggle — pill buttons */
+.atx-unit-toggle {
+	display: flex;
+	border: 1px solid #c3c4c7;
+	border-radius: 3px;
+	overflow: hidden;
+	flex-shrink: 0;
+}
+
+.atx-unit-btn {
+	padding: 3px 7px;
+	font-size: 10px;
+	font-weight: 600;
+	line-height: 1;
+	border: none;
+	border-right: 1px solid #c3c4c7;
+	background: #f0f0f1;
+	color: #666;
+	cursor: pointer;
+	transition: all 0.15s ease;
+	height: 28px;
+	display: flex;
+	align-items: center;
+}
+
+.atx-unit-btn:last-child {
+	border-right: none;
+}
+
+.atx-unit-btn:hover {
+	background: #e0e0e0;
+	color: #333;
+}
+
+.atx-unit-btn.is-active {
+	background: #2271b1;
+	color: #fff;
+}
+
+/* -----------------------------------------------
+   Collapsible sections
+   ----------------------------------------------- */
+
+.atx-collapsible {
+	margin-bottom: 4px;
+}
+
+.atx-collapsible-toggle {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	width: 100%;
+	padding: 8px 0;
+	border: none;
+	background: none;
+	cursor: pointer;
+	font-size: 13px;
+	font-weight: 600;
+	color: #1d2327;
+	text-align: left;
+}
+
+.atx-collapsible-toggle:hover {
+	color: #2271b1;
+}
+
+.atx-collapsible-arrow {
+	transition: transform 0.2s ease;
+	font-size: 16px !important;
+	width: 16px !important;
+	height: 16px !important;
+}
+
+.atx-collapsible.is-open .atx-collapsible-arrow {
+	transform: rotate(90deg);
+}
+
+.atx-collapsible-content {
+	padding: 4px 0 8px 0;
+}
+
+/* Animation controls grid */
+.atx-anim-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 8px;
+	margin-bottom: 8px;
+}
+
+.atx-anim-param {
+	margin-bottom: 8px;
+}
+
+.atx-anim-param label {
+	display: block;
+	font-size: 11px;
+	font-weight: 600;
+	color: #555;
+	margin-bottom: 2px;
+}
+
+.atx-anim-param input[type="number"] {
+	width: 100% !important;
+	padding: 4px 6px !important;
+	font-size: 12px !important;
+	height: 28px !important;
+	box-sizing: border-box;
+}
+
+.atx-anim-param .description {
+	font-size: 10px;
+	margin-top: 2px;
+}
+
+.atx-anim-grid label {
+	display: block;
+	font-size: 11px;
+	font-weight: 600;
+	color: #555;
+	margin-bottom: 2px;
+}
+
+.atx-anim-grid input[type="number"],
+.atx-anim-grid select {
+	width: 100% !important;
+	padding: 4px 6px !important;
+	font-size: 12px !important;
+	height: 28px !important;
+	box-sizing: border-box;
+}
+
+/* Close button grid — 2x2 for size/radius/position */
+.atx-close-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 8px;
+	margin-bottom: 12px;
+}
+
+.atx-close-grid label {
+	display: block;
+	font-size: 11px;
+	font-weight: 600;
+	color: #555;
+	margin-bottom: 2px;
+}
+
+.atx-close-grid input[type="number"] {
+	width: 100% !important;
+	padding: 4px 6px !important;
+	font-size: 12px !important;
+	height: 28px !important;
+	box-sizing: border-box;
+}
+
+/* Close icon upload */
+.atx-close-icon-wrap {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	flex-wrap: wrap;
+}
+
+.atx-close-icon-preview {
+	width: 32px;
+	height: 32px;
+	object-fit: contain;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	padding: 2px;
+	background: #f0f0f1;
+}
+
+.atx-close-icon-wrap .button {
+	font-size: 11px !important;
+	padding: 2px 8px !important;
+	min-height: 26px !important;
+}
+
+/* -----------------------------------------------
+   Targeting checklist
+   ----------------------------------------------- */
+
+.atx-popup-checklist {
+	max-height: 180px;
+	overflow-y: auto;
+	border: 1px solid #ddd;
+	padding: 8px;
+	margin: 6px 0 12px;
+	background: #fafafa;
+}
+
+.atx-popup-checklist label {
+	display: block;
+	padding: 2px 0;
+	font-weight: normal;
+}
+
+.atx-popup-targeting-list strong {
+	display: block;
+	margin-top: 8px;
+	font-size: 12px;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+	color: #555;
+}
+
+/* -----------------------------------------------
+   Admin column styles
+   ----------------------------------------------- */
+
+.atx-status-active {
+	color: #00a32a;
+	font-weight: 600;
+}
+
+.atx-status-inactive {
+	color: #999;
+}
+
+.atx-column-preview .dashicons {
+	font-size: 16px;
+	color: #2271b1;
+}
+
+.atx-element-only-note {
+	margin-top: 8px;
+}
+
+/* Click selector textarea */
+.atx-popup-meta-box textarea {
+	width: 100% !important;
+	max-width: 100% !important;
+	box-sizing: border-box !important;
+	font-family: monospace;
+	font-size: 12px;
+	resize: vertical;
+}
+
