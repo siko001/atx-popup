@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Vendor\Plugin\Support;
+namespace Src\Support;
 
 final class GitHubPluginUpdater
 {

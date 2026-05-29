@@ -90,7 +90,7 @@ function atx_popup_track_event() {
 }
 
 add_action('plugins_loaded', function () {
-	if (is_admin() && class_exists('\\Vendor\\Plugin\\Support\\GitHubPluginUpdater')) {
-		(new \Vendor\Plugin\Support\GitHubPluginUpdater(__FILE__, __DIR__))->register();
+	if (is_admin() && class_exists('\\Src\\Support\\GitHubPluginUpdater')) {
+		(new \Src\Support\GitHubPluginUpdater(__FILE__, __DIR__))->register();
 	}
 });
