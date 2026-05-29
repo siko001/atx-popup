@@ -117,7 +117,8 @@ jobs:
             gh release create "$TAG" "dist/${ZIP_NAME}" \
               --target "${GITHUB_SHA}" \
               --title "${PLUGIN_NAME} v${VERSION}" \
-              --notes "Release v${VERSION}"
+              --notes "Release v${VERSION}" \
+              --latest=false
           else
             gh release create "$TAG" "dist/${ZIP_NAME}" \
               --title "${PLUGIN_NAME} v${VERSION}" \

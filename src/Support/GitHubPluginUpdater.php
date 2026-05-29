@@ -338,34 +338,35 @@ final class GitHubPluginUpdater
         }
 
         $data = json_decode((string) wp_remote_retrieve_body($response), true);
-        if (! is_array($data) || empty($data['tag_name'])) {
-            $this->lastError = sprintf('GitHub returned an invalid latest release response for %s.', $this->config('name'));
+        $selected = $this->selectReleasePayload($data);
+        if (! is_array($selected) || empty($selected['tag_name'])) {
+            $this->lastError = sprintf('GitHub returned an invalid release response for %s.', $this->config('name'));
             set_site_transient($this->config('cache_key'), null, 5 * MINUTE_IN_SECONDS);
 
             return null;
         }
 
-        $package = $this->assetDownloadUrl($data);
+        $package = $this->assetDownloadUrl($selected);
 
         if ($package === '') {
             $assetNames = array_map(
                 static fn ($asset): string => is_array($asset) ? (string) ($asset['name'] ?? '') : '',
-                is_array($data['assets'] ?? null) ? $data['assets'] : []
+                is_array($selected['assets'] ?? null) ? $selected['assets'] : []
             );
             $assetList = implode(', ', array_filter($assetNames));
             $this->lastError = sprintf(
                 'GitHub release %s was found, but asset %s was missing. Available assets: %s',
-                (string) $data['tag_name'],
+                (string) $selected['tag_name'],
                 $this->config('zip_asset'),
                 $assetList !== '' ? $assetList : 'none'
             );
         }
 
         $release = [
-            'version' => ltrim((string) $data['tag_name'], 'vV'),
+            'version' => ltrim((string) $selected['tag_name'], 'vV'),
             'package' => $package,
-            'notes' => (string) ($data['body'] ?? ''),
-            'tested' => (string) ($data['tested'] ?? ''),
+            'notes' => (string) ($selected['body'] ?? ''),
+            'tested' => (string) ($selected['tested'] ?? ''),
         ];
 
         set_site_transient($this->config('cache_key'), $release, $package === '' ? 5 * MINUTE_IN_SECONDS : 6 * HOUR_IN_SECONDS);
@@ -528,7 +529,54 @@ final class GitHubPluginUpdater
 
     private function apiUrl(): string
     {
-        return 'https://api.github.com/repos/'.$this->config('owner').'/'.$this->config('repo').'/releases/latest';
+        return 'https://api.github.com/repos/'.$this->config('owner').'/'.$this->config('repo').'/releases?per_page=30';
+    }
+
+    /**
+     * Select the highest semantic version release from a GitHub releases response.
+     *
+     * @param mixed $payload
+     * @return array<string, mixed>|null
+     */
+    private function selectReleasePayload(mixed $payload): ?array
+    {
+        if (is_array($payload) && isset($payload['tag_name'])) {
+            return $payload;
+        }
+
+        if (! is_array($payload) || ! array_is_list($payload)) {
+            return null;
+        }
+
+        $best = null;
+        $bestVersion = null;
+
+        foreach ($payload as $release) {
+            if (! is_array($release)) {
+                continue;
+            }
+
+            if (! empty($release['draft']) || ! empty($release['prerelease'])) {
+                continue;
+            }
+
+            $tag = (string) ($release['tag_name'] ?? '');
+            if ($tag === '') {
+                continue;
+            }
+
+            $version = ltrim($tag, 'vV');
+            if (! preg_match('/^\d+\.\d+\.\d+([.-][A-Za-z0-9]+)?$/', $version)) {
+                continue;
+            }
+
+            if ($bestVersion === null || version_compare($version, $bestVersion, '>')) {
+                $best = $release;
+                $bestVersion = $version;
+            }
+        }
+
+        return $best;
     }
 
     private function repoUrl(): string
