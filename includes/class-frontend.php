@@ -115,8 +115,17 @@ class ATX_Popup_Frontend {
 				continue;
 			}
 
+			$int_val = intval( $val );
+			// Guard against accidental zero dimensions that collapse the popup to overlay-only.
+			if (
+				0 === $int_val
+				&& in_array( $prop_key, array( 'width', 'min_width', 'max_width', 'height', 'min_height', 'max_height' ), true )
+			) {
+				continue;
+			}
+
 			$css_prop = str_replace( '_', '-', $prop_key );
-			$rule     = $css_prop . ':' . intval( $val ) . esc_attr( $unit ) . ';';
+			$rule     = $css_prop . ':' . $int_val . esc_attr( $unit ) . ';';
 
 			// Padding goes on the content div so scrollbar stays outside.
 			if ( 'padding' === $prop_key ) {
