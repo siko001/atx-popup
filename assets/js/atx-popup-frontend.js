@@ -4,6 +4,7 @@
 	const MS_PER_DAY = 86400000;
 	const overlay = document.getElementById('atx-popup-overlay');
 	if (!overlay) return;
+	const hasGsap = typeof window.gsap !== 'undefined';
 
 	const config = {
 		trigger:       overlay.dataset.trigger || 'load',
@@ -140,17 +141,33 @@
 		const startProps = animStartProps[config.animation] || { opacity: 0 };
 		const bounceEase = config.animation === 'bounce-in' ? 'back.out(1.7)' : ease;
 
-		// 1. Set starting state BEFORE making visible (prevents flash).
+		// Make visible in DOM first.
+		overlay.classList.add('is-visible');
+		document.body.style.overflow = 'hidden';
+
+		// If GSAP is missing (blocked CDN, optimization conflicts), gracefully show popup.
+		if (!hasGsap) {
+			overlay.style.opacity = '1';
+			if (container) {
+				container.style.opacity = '1';
+				container.style.transform = 'none';
+			}
+			trackEvent('impression');
+			document.dispatchEvent(new CustomEvent('atx_popup_shown', { detail: { popupId: config.popupId } }));
+			previousFocus = document.activeElement;
+			document.addEventListener('keydown', trapFocus);
+			var noGsapCloseBtn = document.getElementById('atx-popup-close');
+			if (noGsapCloseBtn) noGsapCloseBtn.focus();
+			return;
+		}
+
+		// 1. Set starting state BEFORE animating (prevents flash).
 		gsap.set(overlay, { opacity: 0 });
 		if (container) {
 			gsap.set(container, startProps);
 		}
 
-		// 2. Now make it visible in DOM.
-		overlay.classList.add('is-visible');
-		document.body.style.overflow = 'hidden';
-
-		// 3. Animate in.
+		// 2. Animate in.
 		if (openTimeline) openTimeline.kill();
 		openTimeline = gsap.timeline();
 
@@ -188,10 +205,18 @@
 		overlay.classList.remove('is-visible');
 		document.body.style.overflow = '';
 
-		if (container) {
+		if (container && hasGsap) {
 			gsap.set(container, { clearProps: 'all' });
 		}
-		gsap.set(overlay, { clearProps: 'opacity' });
+		if (hasGsap) {
+			gsap.set(overlay, { clearProps: 'opacity' });
+		} else {
+			overlay.style.opacity = '';
+			if (container) {
+				container.style.opacity = '';
+				container.style.transform = '';
+			}
+		}
 	}
 
 	function closePopup() {
@@ -203,10 +228,12 @@
 		trackEvent('close');
 		document.dispatchEvent(new CustomEvent('atx_popup_closed', { detail: { popupId: config.popupId } }));
 
-		if (animReverse && openTimeline && openTimeline.progress() > 0) {
+		if (hasGsap && animReverse && openTimeline && openTimeline.progress() > 0) {
 			// Reverse the open animation.
 			openTimeline.eventCallback('onReverseComplete', onCloseComplete);
 			openTimeline.reverse();
+		} else if (!hasGsap) {
+			onCloseComplete();
 		} else {
 			// Default: quick fade out.
 			if (openTimeline) openTimeline.kill();
