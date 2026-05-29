@@ -2,7 +2,7 @@
 /**
  * Plugin Name: ATX Popup
  * Description: A Gutenberg-powered popup builder with targeting, triggers, and animation options.
- * Version: 1.2.0
+ * Version: 1.2.1
  * Author: ATX - Neil VM
  * Author URI: https://identita.com
  * Text Domain: atx-popup
