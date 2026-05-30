@@ -4,7 +4,7 @@
  * Description: A Gutenberg-powered popup builder with targeting, triggers, and animation options.
  * Version: 3.0.0
  * Author: ATX - Neil VM
- * Author URI: https://identita.com
+ * Author URI: https://neilmallia.com
  * Text Domain: atx-popup
  * License: GPL-2.0-or-later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
