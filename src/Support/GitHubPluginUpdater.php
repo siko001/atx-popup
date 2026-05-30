@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Src\Support;
+namespace ATXPopup\Support;
 
 final class GitHubPluginUpdater
 {

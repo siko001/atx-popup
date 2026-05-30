@@ -2,7 +2,7 @@
 /**
  * Plugin Name: ATX Popup
  * Description: A Gutenberg-powered popup builder with targeting, triggers, and animation options.
- * Version: 1.2.1
+ * Version: 3.0.0
  * Author: ATX - Neil VM
  * Author URI: https://identita.com
  * Text Domain: atx-popup
@@ -11,13 +11,16 @@
  * Domain Path: /languages
  * Requires at least: 6.0
  * Requires PHP: 8.1
+ * 
+ * git tag -a v{VERSION}.0.0 -m "Release v{VERSION}.0.0"
+ * git push origin v{VERSION}.0.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'ATX_POPUP_VERSION', '1.3.0' );
+define( 'ATX_POPUP_VERSION', '3.0.0' );
 define( 'ATX_POPUP_PATH', plugin_dir_path( __FILE__ ) );
 define( 'ATX_POPUP_URL', plugin_dir_url( __FILE__ ) );
 
@@ -90,7 +93,7 @@ function atx_popup_track_event() {
 }
 
 add_action('plugins_loaded', function () {
-	if (is_admin() && class_exists('\\Src\\Support\\GitHubPluginUpdater')) {
-		(new \Src\Support\GitHubPluginUpdater(__FILE__, __DIR__))->register();
+	if (is_admin() && class_exists('\\ATXPopup\\Support\\GitHubPluginUpdater')) {
+		(new \ATXPopup\Support\GitHubPluginUpdater(__FILE__, __DIR__))->register();
 	}
 });

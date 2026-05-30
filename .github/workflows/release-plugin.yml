@@ -6,7 +6,7 @@ on:
       - main
       - master
     tags:
-      - 'v*'
+      - '*'
   workflow_dispatch:
     inputs:
       version:
@@ -44,7 +44,7 @@ jobs:
         run: |
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             VERSION="${{ inputs.version }}"
-          elif [[ "${GITHUB_REF}" == refs/tags/v* ]]; then
+          elif [[ "${GITHUB_REF}" == refs/tags/* ]]; then
             VERSION="${GITHUB_REF_NAME#v}"
           else
             # Accept both v-prefixed and plain semver tags: v1.2.3 or 1.2.3
@@ -70,6 +70,23 @@ jobs:
 
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
           echo "tag=v$VERSION" >> "$GITHUB_OUTPUT"
+          echo "source_tag=${GITHUB_REF_NAME:-}" >> "$GITHUB_OUTPUT"
+
+      - name: Ensure canonical v-tag exists
+        if: startsWith(github.ref, 'refs/tags/') && !startsWith(github.ref_name, 'v')
+        shell: bash
+        run: |
+          set -euo pipefail
+          VERSION="${{ steps.version.outputs.version }}"
+          CANONICAL_TAG="v${VERSION}"
+
+          if git rev-parse "refs/tags/${CANONICAL_TAG}" >/dev/null 2>&1; then
+            echo "Canonical tag ${CANONICAL_TAG} already exists."
+            exit 0
+          fi
+
+          git tag "${CANONICAL_TAG}" "${GITHUB_SHA}"
+          git push origin "refs/tags/${CANONICAL_TAG}"
 
       - name: Build plugin ZIP
         shell: bash
